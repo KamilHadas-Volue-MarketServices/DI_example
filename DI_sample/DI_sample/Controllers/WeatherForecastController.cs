@@ -12,13 +12,18 @@ namespace DI_sample.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ICustomClass _customClass;
+        private readonly IDummy _dummy;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger,
+            ICustomClass customClass, IDummy dummy)
         {
             _logger = logger;
+            _customClass = customClass;
+            _dummy = dummy;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        [HttpGet("GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -29,5 +34,16 @@ namespace DI_sample.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet( "GetGuid")]
+        public object TestDi()
+        {
+            return new
+            {
+                CustomClass = _customClass.RandomGuid,
+                Dummy = _dummy.Guid
+            };
+        }
+
     }
 }

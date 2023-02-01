@@ -9,7 +9,8 @@ namespace TestProject1
         [Fact]
         public void Test1()
         {
-
+            var dataAccessMock = new Mock<IDataAccess>();
+            dataAccessMock.Setup(m => m.CorrectNumberOfLegs(It.IsAny<string>())).Returns(4);
         }
     }
 }

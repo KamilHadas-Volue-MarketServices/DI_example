@@ -1,6 +1,11 @@
 ﻿namespace DI_sample
 {
-    public class CustomClass
+    public interface ICustomClass
+    {
+        string RandomGuid { get; set; }
+    }
+
+    public class CustomClass : ICustomClass
     {
         public string RandomGuid { get; set; }
 
