@@ -26,6 +26,7 @@ namespace DI_sample.Controllers
         [HttpGet("GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            Console.WriteLine("text");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
