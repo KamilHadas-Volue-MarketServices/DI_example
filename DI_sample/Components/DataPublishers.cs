@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Components
 {
-    internal interface ISimpleEventPublisher
+    public interface ISimpleEventPublisher
     {
         void Publish(SimpleEvent eventMessage);
     }

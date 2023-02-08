@@ -1,3 +1,4 @@
+using Components;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DI_sample.Controllers
@@ -14,13 +15,15 @@ namespace DI_sample.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly ICustomClass _customClass;
         private readonly IDummy _dummy;
+        private readonly IEventHandler _eventHandler;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger,
-            ICustomClass customClass, IDummy dummy)
+            ICustomClass customClass, IDummy dummy, IEventHandler eventHandler)
         {
             _logger = logger;
             _customClass = customClass;
             _dummy = dummy;
+            _eventHandler = eventHandler;
         }
 
         [HttpGet("GetWeatherForecast")]
@@ -39,6 +42,7 @@ namespace DI_sample.Controllers
         [HttpGet( "GetGuid")]
         public object TestDi()
         {
+            _eventHandler.PublishEvent(new SimpleEvent{MessageToPass = ""});
             return new
             {
                 CustomClass = _customClass.RandomGuid,
